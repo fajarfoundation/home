@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -675,21 +676,87 @@
   .contact-submit:hover { background: var(--brown-mid); }
 
   /* FOOTER */
+  /* ===== FOOTER (UPDATED) ===== */
+
+footer {
+  background: var(--brown-dark);
+  padding: 3rem 5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  max-width: 320px;
+}
+
+.footer-logo img {
+  height: 44px;
+  margin-bottom: 1rem;
+}
+
+.footer-address {
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.6);
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 1rem;
+}
+
+.social-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-size: 14px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background: var(--gold);
+  color: var(--brown-dark);
+  border-color: var(--gold);
+}
+
+.footer-copy {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  text-align: right;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
   footer {
-    background: var(--brown-dark);
-    padding: 2rem 5rem;
-    display: flex; align-items: center; justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
 
-  .footer-logo img {
-    height: 44px; width: auto; object-fit: contain;
+  .footer-right {
+    align-items: center;
   }
 
   .footer-copy {
-    font-size: 11px;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.05em;
+    text-align: center;
   }
+}
 
   /* SCROLL ANIMATION */
   .reveal {
@@ -1065,10 +1132,36 @@ He has supported women farmers and community groups in building sustainable live
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">
-    <img src="logo.png" alt="Fajar Foundation"/>
+
+  <div class="footer-left">
+    <div class="footer-logo">
+      <img src="logo.png" alt="Fajar Foundation"/>
+    </div>
+
+    <div class="footer-address">
+      FAJAR FOUNDATION<br>
+      C/O AVINASH RAMRAO, CHITRAKAR,<br>
+      AT TAWLAR, Pathrot,<br>
+      Achalpur City, Amravati - 444808,<br>
+      Maharashtra
+    </div>
   </div>
-  <p class="footer-copy">© 2024 Fajar Foundation. Registered under Section 8, Companies Act 2013.</p>
+
+  <div class="footer-right">
+    <div class="footer-social">
+      <a href="#" target="_blank" class="social-icon">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="#" target="_blank" class="social-icon">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+
+    <p class="footer-copy">
+      © 2024 Fajar Foundation. Registered under Section 8, Companies Act 2013.
+    </p>
+  </div>
+
 </footer>
 
 <script>
