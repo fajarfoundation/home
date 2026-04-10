@@ -906,6 +906,55 @@ footer {
   }
 }
 
+ /* HERO LOGO FIX */
+.hero-deco {
+  position: absolute;
+  right: 10%;
+  bottom: 12%;
+  opacity: 0.6;
+}
+
+.hero-deco img {
+  width: 80px;   /* reduced from big size */
+}
+
+ /* HERO TEXT FIX */
+.hero-content {
+  max-width: 100%;
+  padding: 0 1.5rem;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 1.7rem;
+  line-height: 1.3;
+}
+
+.hero-body {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+ /* NAV MOBILE FIX */
+@media (max-width: 768px) {
+
+  nav {
+    padding: 0.8rem 1rem;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+
+}
+
  /* GET INVOLVED POPUP */
 
 .involved-popup {
