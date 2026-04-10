@@ -863,6 +863,49 @@ footer {
   }
 }
 
+ @media (max-width: 900px) {
+
+  .programs-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* ADD THIS BELOW */
+
+  #home {
+    min-height: 80vh;
+    padding-top: 80px;
+  }
+
+  .hero-bg {
+    background:
+      linear-gradient(to bottom, rgba(245,240,232,0.95), rgba(245,240,232,0.6)),
+      url('hero.jpg') center top / cover no-repeat;
+  }
+
+  .hero-content {
+    padding: 0 1.5rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-body {
+    font-size: 14px;
+  }
+
+  .hero-deco {
+    right: 5%;
+    bottom: 8%;
+  }
+
+  .hero-deco img {
+    width: 120px;
+  }
+}
+
  /* GET INVOLVED POPUP */
 
 .involved-popup {
