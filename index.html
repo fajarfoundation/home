@@ -972,6 +972,79 @@ footer {
   font-size: 20px;
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+
+  /* ===== HERO FIX ===== */
+  #home {
+    min-height: 75vh;
+    padding: 100px 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .hero-bg {
+    background:
+      linear-gradient(to bottom, rgba(245,240,232,0.95), rgba(245,240,232,0.6)),
+      url('hero.jpg') center / cover no-repeat;
+  }
+
+  .hero-title {
+    font-size: 1.8rem;
+    line-height: 1.3;
+  }
+
+  .hero-body {
+    font-size: 14px;
+  }
+
+  /* 🔥 FIX LOGO OVERLAP */
+  .hero-deco {
+    position: static;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .hero-deco img {
+    width: 100px;
+    opacity: 0.8;
+  }
+
+  /* ===== IMPACT FIX ===== */
+  .impact-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .impact-card {
+    padding: 1.5rem;
+    border-radius: 10px;
+  }
+
+  .impact-number {
+    font-size: 2rem;
+  }
+
+  /* ===== TEAM FIX ===== */
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .team-card img {
+    height: 250px;
+    object-fit: cover;
+  }
+
+  .team-card-body {
+    padding: 1.2rem;
+  }
+
+  .team-card-body p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+}
  
  
 </style>
