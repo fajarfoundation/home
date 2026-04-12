@@ -7,25 +7,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --brown-dark:   #3a1f00;
-    --brown-mid:    #5c2d00;
-    --brown-warm:   #6b3300;
-    --gold:         #c89a2e;
-    --gold-light:   #e8c060;
-    --gold-pale:    #f5e6c0;
-    --cream:        #f5f0e8;
-    --cream-light:  #faf7f2;
-    --text-dark:    #2c1a00;
-    --text-mid:     #5a3800;
-    --text-muted:   #7a5c2e;
-    --border-card:  #e8dcc8;
-    --font-serif:   'Cormorant Garamond', Georgia, serif;
-    --font-sans:    'Jost', sans-serif;
+    --brown-dark:  #3a1f00;
+    --brown-mid:   #5c2d00;
+    --brown-warm:  #6b3300;
+    --gold:        #c89a2e;
+    --gold-light:  #e8c060;
+    --gold-pale:   #f5e6c0;
+    --cream:       #f5f0e8;
+    --cream-light: #faf7f2;
+    --text-dark:   #2c1a00;
+    --text-mid:    #5a3800;
+    --text-muted:  #7a5c2e;
+    --border-card: #e8dcc8;
+    --font-serif:  'Cormorant Garamond', Georgia, serif;
+    --font-sans:   'Jost', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
@@ -37,20 +37,27 @@
     overflow-x: hidden;
   }
 
-  @keyframes slowRotate {
-  from {
-    transform: rotate(0deg);
+  /* ── LOADER ───────────────────────────────────────── */
+  #loader {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: var(--cream-light);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
   }
-  to {
-    transform: rotate(360deg);
+
+  #loader img {
+    width: 72px;
+    animation: spinLoader 1.8s linear infinite;
   }
-}
 
-.nav-logo img {
-  animation: slowRotate 12s linear infinite;
-}
+  @keyframes spinLoader {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
 
-  /* NAV */
+  /* ── NAV ──────────────────────────────────────────── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     background: var(--brown-dark);
@@ -68,16 +75,17 @@
     height: 36px;
     width: auto;
     object-fit: contain;
+    /* NO rotation animation */
   }
 
   .nav-links {
-    display: flex; gap: 2.2rem; list-style: none;
+    display: flex; align-items: center;
+    gap: 2rem; list-style: none;
   }
 
   .nav-links a {
     font-family: var(--font-sans);
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 12px; font-weight: 500;
     letter-spacing: 0.1em;
     color: #fff;
     text-decoration: none;
@@ -86,7 +94,23 @@
 
   .nav-links a:hover { color: var(--gold-light); }
 
-  /* HERO */
+  /* GET INVOLVED — special pill button in nav */
+  .nav-involved-btn {
+    font-family: var(--font-sans);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--brown-dark);
+    background: var(--gold);
+    border: none; cursor: pointer;
+    padding: 7px 16px;
+    border-radius: 30px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-involved-btn:hover { background: var(--gold-light); }
+
+  /* ── HERO ─────────────────────────────────────────── */
   #home {
     position: relative;
     min-height: 100vh;
@@ -105,24 +129,20 @@
   .hero-content {
     position: relative; z-index: 2;
     padding: 0 5rem;
-    max-width: 680px;
+    max-width: 640px;
   }
 
   .hero-tag {
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold);
     margin-bottom: 1.2rem;
-    text-transform: uppercase;
   }
 
   .hero-title {
     font-family: var(--font-serif);
     font-size: clamp(2.4rem, 4vw, 3.6rem);
-    font-weight: 600;
-    line-height: 1.15;
+    font-weight: 600; line-height: 1.15;
     color: var(--brown-dark);
     margin-bottom: 1.4rem;
   }
@@ -135,150 +155,111 @@
   }
 
   .hero-body {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.75;
+    font-size: 15px; font-weight: 300; line-height: 1.75;
     color: var(--text-mid);
-    max-width: 480px;
-    margin-bottom: 2.2rem;
+    max-width: 480px; margin-bottom: 2.2rem;
   }
 
   .hero-body strong { font-weight: 600; color: var(--text-dark); }
 
   .hero-cta {
     display: inline-flex; align-items: center; gap: 10px;
-    background: var(--brown-dark);
-    color: var(--gold-light);
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    background: var(--brown-dark); color: var(--gold-light);
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
     text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 40px;
+    padding: 14px 28px; border-radius: 40px;
     transition: background 0.2s;
   }
 
   .hero-cta:hover { background: var(--brown-mid); color: #fff; }
 
-  .hero-dots { display: flex; gap: 8px; margin-top: 2.5rem; }
-
-  .hero-dot {
-    width: 22px; height: 7px; border-radius: 4px;
-    background: var(--gold);
-  }
-
-  .hero-dot.inactive {
-    width: 7px;
-    background: var(--gold-pale);
-    border: 1px solid var(--gold);
-  }
-
+  /* hero deco — full opacity logo, right side */
   .hero-deco {
-    position: absolute; right: 8%; bottom: 12%; z-index: 2;
-    pointer-events: none;
+    position: absolute; right: 8%; top: 50%;
+    transform: translateY(-50%);
+    z-index: 2; pointer-events: none;
   }
 
-  /* ABOUT */
+  .hero-deco img {
+    width: 200px;
+    opacity: 1;
+    display: block;
+  }
+
+  /* ── ABOUT ────────────────────────────────────────── */
   #about {
     background: var(--brown-dark);
-    padding: 6rem 5rem;
-    text-align: center;
+    padding: 6rem 5rem; text-align: center;
   }
 
   .section-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold-light);
-    margin-bottom: 2rem;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 2rem;
   }
 
   .section-eyebrow::before,
   .section-eyebrow::after {
-    content: '';
-    display: block; width: 32px; height: 1px;
+    content: ''; display: block; width: 32px; height: 1px;
     background: currentColor;
   }
 
   .about-title {
     font-family: var(--font-serif);
     font-size: clamp(2.2rem, 4vw, 3.4rem);
-    font-weight: 600;
-    color: var(--gold-light);
-    margin-bottom: 2rem;
-    line-height: 1.2;
+    font-weight: 600; color: var(--gold-light);
+    margin-bottom: 2rem; line-height: 1.2;
   }
 
   .about-body {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.8;
+    font-size: 15px; font-weight: 300; line-height: 1.8;
     color: rgba(255,255,255,0.75);
-    max-width: 700px;
-    margin: 0 auto 2rem;
+    max-width: 700px; margin: 0 auto 2rem;
   }
 
   .about-body .highlight { color: var(--gold-light); font-weight: 500; }
 
   .about-badge {
     display: inline-flex; align-items: center; gap: 10px;
-    border: 1px solid rgba(200,154,46,0.5);
-    border-radius: 40px;
-    padding: 10px 24px;
-    color: var(--gold-light);
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.04em;
+    border: 1px solid rgba(200,154,46,0.5); border-radius: 40px;
+    padding: 10px 24px; color: var(--gold-light);
+    font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
   }
 
-  .about-badge::before, .about-badge::after { content: '•'; font-size: 10px; color: var(--gold); }
+  .about-badge::before,
+  .about-badge::after { content: '•'; font-size: 10px; color: var(--gold); }
 
-  /* BELIEF */
+  /* ── BELIEF ───────────────────────────────────────── */
   #belief {
-    background: var(--cream);
-    padding: 6rem 5rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: start;
+    background: var(--cream); padding: 6rem 5rem;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
   }
 
   .belief-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.5rem;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
   }
 
   .belief-eyebrow::before {
-    content: '';
-    display: block; width: 32px; height: 1px;
+    content: ''; display: block; width: 32px; height: 1px;
     background: var(--gold);
   }
 
   .belief-title {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 600;
-    color: var(--brown-dark);
-    line-height: 1.2;
-    margin-bottom: 1.5rem;
+    font-weight: 600; color: var(--brown-dark);
+    line-height: 1.2; margin-bottom: 1.5rem;
   }
 
   .belief-body {
-    font-size: 15px;
-    font-weight: 300;
-    line-height: 1.85;
-    color: var(--text-mid);
+    font-size: 15px; font-weight: 300;
+    line-height: 1.85; color: var(--text-mid);
   }
 
   .belief-body .highlight { color: var(--gold); font-weight: 600; }
@@ -288,42 +269,32 @@
 
   .belief-card {
     background: var(--cream-light);
-    border: 1px solid var(--border-card);
-    border-radius: 12px;
+    border: 1px solid var(--border-card); border-radius: 12px;
     padding: 1.4rem 1.6rem;
   }
 
   .belief-card-icon { font-size: 20px; margin-bottom: 0.7rem; display: block; }
 
   .belief-card-title {
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--brown-dark);
-    margin-bottom: 0.4rem;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--brown-dark); margin-bottom: 0.4rem;
   }
 
   .belief-card-body { font-size: 13px; font-weight: 300; line-height: 1.65; color: var(--text-muted); }
 
-  /* APPROACH */
+  /* ── APPROACH ─────────────────────────────────────── */
   #approach { background: var(--cream-light); padding: 6rem 5rem; }
 
   .approach-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-sans);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1rem;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
   }
 
   .approach-eyebrow::before {
-    content: '';
-    display: block; width: 32px; height: 1px;
+    content: ''; display: block; width: 32px; height: 1px;
     background: var(--gold);
   }
 
@@ -332,9 +303,7 @@
   .approach-title {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 600;
-    color: var(--brown-dark);
-    margin-bottom: 1rem;
+    font-weight: 600; color: var(--brown-dark); margin-bottom: 1rem;
   }
 
   .approach-sub { font-size: 15px; font-weight: 300; line-height: 1.75; color: var(--text-muted); max-width: 520px; }
@@ -345,8 +314,7 @@
     background: var(--cream);
     border: 1px solid var(--border-card);
     border-top: 4px solid var(--gold);
-    border-radius: 12px;
-    padding: 2rem;
+    border-radius: 12px; padding: 2rem;
   }
 
   .approach-card-top {
@@ -356,8 +324,7 @@
 
   .approach-card-icon {
     width: 44px; height: 44px;
-    background: var(--brown-dark);
-    border-radius: 10px;
+    background: var(--brown-dark); border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
   }
 
@@ -365,63 +332,63 @@
 
   .approach-card-num {
     font-family: var(--font-serif);
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--gold-pale);
-    line-height: 1;
+    font-size: 3rem; font-weight: 700;
+    color: var(--gold-pale); line-height: 1;
   }
 
   .approach-card-title {
     font-family: var(--font-serif);
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--brown-dark);
-    margin-bottom: 0.8rem;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--brown-dark); margin-bottom: 0.8rem;
   }
 
   .approach-card-body { font-size: 13.5px; font-weight: 300; line-height: 1.8; color: var(--text-muted); }
   .approach-card-body .hl { color: var(--gold); font-weight: 500; }
   .approach-card-body strong { font-weight: 600; color: var(--text-dark); }
 
-  /* QUOTE */
-  #quote { background: var(--brown-dark); padding: 5rem 5rem; text-align: center; }
+  /* ── QUOTE ────────────────────────────────────────── */
+  #quote { background: var(--brown-dark); padding: 5rem; text-align: center; }
 
   .quote-mark {
+    font-family: Georgia, serif;
     font-size: 3rem; color: var(--gold); line-height: 0.6;
-    display: block; margin-bottom: 1.8rem; font-family: Georgia, serif;
+    display: block; margin-bottom: 1.8rem;
   }
 
   .quote-text {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-    font-weight: 400;
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem); font-weight: 400;
     color: rgba(255,255,255,0.92);
-    max-width: 760px;
-    margin: 0 auto 1.5rem;
-    line-height: 1.5;
+    max-width: 760px; margin: 0 auto 1.5rem; line-height: 1.5;
   }
 
   .quote-text .people { color: var(--gold-light); font-weight: 600; }
 
   .quote-attr {
-    font-family: var(--font-sans);
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    font-weight: 500;
-    color: rgba(255,255,255,0.45);
-    text-transform: uppercase;
+    font-size: 11px; letter-spacing: 0.2em; font-weight: 500;
+    color: rgba(255,255,255,0.45); text-transform: uppercase;
   }
 
-  /* PROGRAMS */
+  /* ── PROGRAMS ─────────────────────────────────────── */
   #programs { background: var(--cream); padding: 6rem 5rem; text-align: center; }
+
+  .programs-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+
+  .programs-eyebrow::before,
+  .programs-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px;
+    background: var(--gold);
+  }
 
   .programs-title {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 600;
-    color: var(--brown-dark);
-    margin-bottom: 0.8rem;
+    font-weight: 600; color: var(--brown-dark); margin-bottom: 0.8rem;
   }
 
   .programs-sub {
@@ -437,18 +404,14 @@
 
   .prog-card {
     background: var(--cream-light);
-    border: 1px solid var(--border-card);
-    border-radius: 12px;
-    padding: 2rem 1.5rem;
-    text-align: left;
+    border: 1px solid var(--border-card); border-radius: 12px;
+    padding: 2rem 1.5rem; text-align: left;
   }
 
   .prog-card-icon {
-    width: 44px; height: 44px;
-    background: var(--brown-dark);
-    border-radius: 10px;
-    display: flex; align-items: center; justify-content: center;
-    margin-bottom: 1.2rem; font-size: 18px;
+    width: 44px; height: 44px; background: var(--brown-dark);
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; margin-bottom: 1.2rem; font-size: 18px;
   }
 
   .prog-card-title {
@@ -459,29 +422,90 @@
 
   .prog-card-body { font-size: 13px; font-weight: 300; line-height: 1.7; color: var(--text-muted); }
 
-  /* TEAM */
-  #team { background: var(--cream-light); padding: 6rem 5rem; text-align: center; }
+  /* ── IMPACT ───────────────────────────────────────── */
+  #impact { background: var(--cream-light); padding: 6rem 5rem; text-align: center; }
 
-  .team-eyebrow {
+  .impact-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-sans);
     font-size: 11px; font-weight: 500;
     letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 1rem;
   }
 
-  .team-eyebrow::before, .team-eyebrow::after {
-    content: '';
-    display: block; width: 32px; height: 1px;
+  .impact-eyebrow::before,
+  .impact-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .impact-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 600; color: var(--brown-dark); margin-bottom: 1rem;
+  }
+
+  .impact-sub {
+    font-size: 15px; color: var(--text-muted);
+    max-width: 500px; margin: 0 auto 3rem;
+    font-weight: 300; line-height: 1.7;
+  }
+
+  .impact-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; max-width: 1000px; margin: 0 auto;
+  }
+
+  .impact-card {
+    background: var(--cream);
+    border: 1px solid var(--border-card);
+    border-top: 4px solid var(--gold);
+    border-radius: 12px; padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .impact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 40px rgba(58,31,0,0.12);
+  }
+
+  .impact-number {
+    font-family: var(--font-serif);
+    font-size: 3rem; font-weight: 600;
+    color: var(--gold); margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .impact-suffix {
+    font-family: var(--font-serif);
+    font-size: 1.8rem; font-weight: 600;
+    color: var(--gold);
+  }
+
+  .impact-label {
+    font-size: 13px; color: var(--text-muted);
+    letter-spacing: 0.04em; line-height: 1.5;
+  }
+
+  /* ── TEAM ─────────────────────────────────────────── */
+  #team { background: var(--cream); padding: 6rem 5rem; text-align: center; }
+
+  .team-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+
+  .team-eyebrow::before,
+  .team-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px;
     background: var(--gold);
   }
 
   .team-title {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 3.5vw, 2.8rem);
-    font-weight: 600;
-    color: var(--brown-dark);
-    margin-bottom: 0.8rem;
+    font-weight: 600; color: var(--brown-dark); margin-bottom: 0.8rem;
   }
 
   .team-sub {
@@ -491,21 +515,16 @@
   }
 
   .team-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
-    max-width: 960px;
-    margin: 0 auto;
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; max-width: 960px; margin: 0 auto;
   }
 
   .team-card {
-    background: var(--cream);
-    border: 1px solid var(--border-card);
-    border-radius: 16px;
-    overflow: hidden;
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: var(--cream-light);
+    border: 1px solid var(--border-card); border-radius: 16px;
+    overflow: hidden; text-align: left;
     display: flex; flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .team-card:hover {
@@ -514,72 +533,61 @@
   }
 
   .team-photo-wrap {
-    width: 100%;
-    aspect-ratio: 3/3.6;
-    overflow: hidden;
-    background: var(--gold-pale);
+    width: 100%; aspect-ratio: 3/3.6;
+    overflow: hidden; background: var(--gold-pale);
   }
 
   .team-photo-wrap img {
     width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-    transition: transform 0.4s ease;
+    object-fit: cover; object-position: top center;
+    display: block; transition: transform 0.4s ease;
   }
 
   .team-card:hover .team-photo-wrap img { transform: scale(1.04); }
 
-  .team-info {
-    padding: 1.4rem 1.6rem 1.6rem;
-    flex: 1;
-  }
+  .team-info { padding: 1.4rem 1.6rem 1.6rem; flex: 1; }
 
   .team-badge {
     display: inline-block;
-    font-family: var(--font-sans);
     font-size: 10px; font-weight: 600;
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--gold);
     background: rgba(200,154,46,0.1);
     border: 1px solid rgba(200,154,46,0.3);
-    border-radius: 20px;
-    padding: 4px 12px;
-    margin-bottom: 0.7rem;
+    border-radius: 20px; padding: 4px 12px; margin-bottom: 0.7rem;
   }
 
   .team-name {
     font-family: var(--font-serif);
     font-size: 1.35rem; font-weight: 600;
-    color: var(--brown-dark);
-    margin-bottom: 0.65rem;
-    line-height: 1.2;
+    color: var(--brown-dark); margin-bottom: 0.65rem; line-height: 1.2;
   }
 
   .team-bio {
     font-size: 13px; font-weight: 300;
-    line-height: 1.72; color: var(--text-muted);
+    line-height: 1.75; color: var(--text-muted);
   }
+
+  .team-bio p + p { margin-top: 0.75rem; }
 
   .team-card-bar {
     height: 3px;
     background: linear-gradient(to right, var(--gold), var(--gold-light));
   }
 
-  /* DONATE */
+  /* ── DONATE ───────────────────────────────────────── */
   #donate { background: var(--brown-warm); padding: 6rem 5rem; text-align: center; }
 
   .donate-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-sans);
     font-size: 11px; font-weight: 500;
     letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold-light); margin-bottom: 1.5rem;
   }
 
-  .donate-eyebrow::before, .donate-eyebrow::after {
-    content: '';
-    display: block; width: 32px; height: 1px;
+  .donate-eyebrow::before,
+  .donate-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px;
     background: var(--gold-light);
   }
 
@@ -598,7 +606,6 @@
   .donate-btn {
     display: inline-flex; align-items: center; gap: 10px;
     background: var(--gold); color: var(--brown-dark);
-    font-family: var(--font-sans);
     font-size: 12px; font-weight: 600;
     letter-spacing: 0.12em; text-transform: uppercase;
     padding: 14px 36px; border-radius: 40px;
@@ -607,20 +614,19 @@
 
   .donate-btn:hover { background: var(--gold-light); }
 
-  /* CONTACT */
+  /* ── CONTACT ──────────────────────────────────────── */
   #contact { background: var(--cream); padding: 6rem 5rem; text-align: center; }
 
   .contact-eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
-    font-family: var(--font-sans);
     font-size: 11px; font-weight: 500;
     letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 1rem;
   }
 
-  .contact-eyebrow::before, .contact-eyebrow::after {
-    content: '';
-    display: block; width: 32px; height: 1px;
+  .contact-eyebrow::before,
+  .contact-eyebrow::after {
+    content: ''; display: block; width: 32px; height: 1px;
     background: var(--gold);
   }
 
@@ -638,20 +644,16 @@
 
   .contact-form {
     max-width: 560px; margin: 0 auto;
-    display: flex; flex-direction: column; gap: 1rem;
-    text-align: left;
+    display: flex; flex-direction: column; gap: 1rem; text-align: left;
   }
 
   .contact-form input,
   .contact-form textarea {
     width: 100%; padding: 13px 16px;
-    border: 1px solid var(--border-card);
-    border-radius: 8px;
+    border: 1px solid var(--border-card); border-radius: 8px;
     background: var(--cream-light);
-    font-family: var(--font-sans);
-    font-size: 14px; font-weight: 300;
-    color: var(--text-dark); outline: none;
-    transition: border 0.2s;
+    font-family: var(--font-sans); font-size: 14px; font-weight: 300;
+    color: var(--text-dark); outline: none; transition: border 0.2s;
   }
 
   .contact-form input::placeholder,
@@ -665,7 +667,6 @@
   .contact-submit {
     display: inline-flex; align-items: center; gap: 10px;
     background: var(--brown-dark); color: var(--gold-light);
-    font-family: var(--font-sans);
     font-size: 11px; font-weight: 500;
     letter-spacing: 0.15em; text-transform: uppercase;
     padding: 14px 32px; border-radius: 40px;
@@ -675,90 +676,120 @@
 
   .contact-submit:hover { background: var(--brown-mid); }
 
-  /* FOOTER */
-  /* ===== FOOTER (UPDATED) ===== */
-
-footer {
-  background: var(--brown-dark);
-  padding: 3rem 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.footer-left {
-  max-width: 320px;
-}
-
-.footer-logo img {
-  height: 44px;
-  margin-bottom: 1rem;
-}
-
-.footer-address {
-  font-size: 12px;
-  line-height: 1.6;
-  color: rgba(255,255,255,0.6);
-}
-
-.footer-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.footer-social {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 1rem;
-}
-
-.social-icon {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold-light);
-  font-size: 14px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-}
-
-.social-icon:hover {
-  background: var(--gold);
-  color: var(--brown-dark);
-  border-color: var(--gold);
-}
-
-.footer-copy {
-  font-size: 11px;
-  color: rgba(255,255,255,0.4);
-  text-align: right;
-}
-
-/* MOBILE */
-@media (max-width: 900px) {
+  /* ── FOOTER ───────────────────────────────────────── */
   footer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    background: var(--brown-dark);
+    padding: 3rem 5rem;
+    display: flex; justify-content: space-between;
+    align-items: flex-start; gap: 3rem; flex-wrap: wrap;
+  }
+
+  .footer-left { max-width: 320px; }
+
+  .footer-logo img { height: 44px; margin-bottom: 1rem; display: block; }
+
+  .footer-address {
+    font-size: 12px; line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
   }
 
   .footer-right {
-    align-items: center;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 1rem;
+  }
+
+  .footer-social { display: flex; gap: 12px; }
+
+  .social-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold-light); font-size: 14px;
+    text-decoration: none; transition: all 0.2s;
+  }
+
+  .social-icon:hover {
+    background: var(--gold); color: var(--brown-dark);
+    border-color: var(--gold);
   }
 
   .footer-copy {
-    text-align: center;
+    font-size: 11px; color: rgba(255,255,255,0.4);
+    text-align: right; line-height: 1.6;
   }
-}
 
-  /* SCROLL ANIMATION */
+  /* ── GET INVOLVED POPUP ───────────────────────────── */
+  .involved-popup {
+    display: none; position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(30,10,0,0.65);
+    justify-content: center; align-items: center; z-index: 999;
+  }
+
+  .involved-box {
+    background: var(--cream-light);
+    width: 540px; max-width: 92%;
+    padding: 2.5rem;
+    border-radius: 16px;
+    border-top: 4px solid var(--gold);
+    max-height: 90vh; overflow-y: auto;
+    position: relative;
+  }
+
+  .involved-box h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem; font-weight: 600;
+    color: var(--brown-dark); margin-bottom: 0.4rem;
+  }
+
+  .involved-box .involved-sub {
+    font-size: 14px; font-weight: 300;
+    color: var(--text-muted); margin-bottom: 2rem;
+  }
+
+  .involved-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.8rem; }
+
+  .involved-item {
+    background: var(--cream);
+    border: 1px solid var(--border-card); border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+  }
+
+  .involved-item h3 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--brown-dark); margin-bottom: 0.4rem;
+  }
+
+  .involved-item p {
+    font-size: 13px; font-weight: 300;
+    line-height: 1.65; color: var(--text-muted);
+  }
+
+  .involved-item p strong { font-weight: 600; color: var(--text-dark); }
+
+  .apply-main-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--brown-dark); color: var(--gold-light);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 13px 28px; border-radius: 40px;
+    text-decoration: none; transition: background 0.2s;
+  }
+
+  .apply-main-btn:hover { background: var(--brown-mid); color: #fff; }
+
+  .close-btn {
+    position: absolute; top: 1.2rem; right: 1.4rem;
+    font-size: 22px; font-weight: 300; cursor: pointer;
+    color: var(--text-muted); line-height: 1;
+    background: none; border: none;
+    transition: color 0.2s;
+  }
+
+  .close-btn:hover { color: var(--brown-dark); }
+
+  /* ── SCROLL REVEAL ────────────────────────────────── */
   .reveal {
     opacity: 0; transform: translateY(24px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -766,368 +797,61 @@ footer {
 
   .reveal.visible { opacity: 1; transform: none; }
 
-  /* RESPONSIVE */
+  /* ── RESPONSIVE ───────────────────────────────────── */
   @media (max-width: 900px) {
-    nav { padding: 0 1.5rem; }
-    .nav-links { gap: 1.2rem; }
-    #home, #about, #belief, #approach, #quote,
-    #programs, #team, #donate, #contact { padding-left: 2rem; padding-right: 2rem; }
-    .hero-content { padding: 0 2rem; }
+    nav { padding: 0 1.2rem; height: 52px; }
+    .nav-links { gap: 1rem; overflow-x: auto; }
+    .nav-links a { font-size: 11px; }
+
+    #home { min-height: 80vh; padding-top: 52px; }
+
+    .hero-bg {
+      background:
+        linear-gradient(to bottom, rgba(245,240,232,0.96) 60%, rgba(245,240,232,0.5) 100%),
+        url('hero.jpg') center top/cover no-repeat;
+    }
+
+    .hero-content { padding: 2rem 1.5rem; max-width: 100%; text-align: center; }
+    .hero-body { max-width: 100%; }
+    .hero-cta { margin: 0 auto; }
+
+    .hero-deco {
+      position: static; transform: none;
+      display: flex; justify-content: center;
+      margin: 1.5rem auto 0; padding-bottom: 2rem;
+    }
+
+    .hero-deco img { width: 130px; }
+
+    #about, #belief, #approach, #quote,
+    #programs, #impact, #team, #donate, #contact {
+      padding-left: 1.5rem; padding-right: 1.5rem;
+    }
+
     #belief { grid-template-columns: 1fr; }
     .approach-grid { grid-template-columns: 1fr; }
     .programs-grid { grid-template-columns: 1fr 1fr; }
-    .team-grid { grid-template-columns: 1fr; max-width: 400px; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem; }
-  }
- /* ===== IMPACT SECTION FIX ===== */
+    .impact-grid { grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .team-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
 
-#impact {
-  background: var(--cream-light);
-  padding: 6rem 5rem;
-  text-align: center;
-}
-
-.impact-header {
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.impact-eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 1rem;
-}
-
-.impact-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 2.8rem);
-  font-weight: 600;
-  color: var(--brown-dark);
-  margin-bottom: 1rem;
-}
-
-.impact-sub {
-  font-size: 15px;
-  color: var(--text-muted);
-  max-width: 500px;
-  margin: 0 auto 3rem;
-}
-
-.impact-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-  max-width: 1000px;
-  margin: 3rem auto 0;
-}
-
-.impact-card {
-  background: var(--cream);
-  border: 1px solid var(--border-card);
-  border-radius: 12px;
-  padding: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.impact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 18px 40px rgba(58,31,0,0.12);
-}
-
-.impact-number {
-  font-family: var(--font-serif);
-  font-size: 2.8rem;
-  font-weight: 600;
-  color: var(--gold);
-  margin-bottom: 0.6rem;
-}
-
-.impact-label {
-  font-size: 13px;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
-
-/* responsive */
-@media (max-width: 900px) {
-  .impact-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 500px) {
-  .impact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
- @media (max-width: 900px) {
-
-  .programs-grid {
-    grid-template-columns: 1fr 1fr;
+    footer { flex-direction: column; align-items: center; text-align: center; padding: 2.5rem 1.5rem; }
+    .footer-right { align-items: center; }
+    .footer-copy { text-align: center; }
   }
 
-  /* ADD THIS BELOW */
-
-  #home {
-    min-height: 80vh;
-    padding-top: 80px;
+  @media (max-width: 500px) {
+    .programs-grid { grid-template-columns: 1fr; }
+    .impact-grid { grid-template-columns: 1fr; }
   }
-
-  .hero-bg {
-    background:
-      linear-gradient(to bottom, rgba(245,240,232,0.95), rgba(245,240,232,0.6)),
-      url('hero.jpg') center top / cover no-repeat;
-  }
-
-  .hero-content {
-    padding: 0 1.5rem;
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .hero-body {
-    font-size: 14px;
-  }
-
-  .hero-deco {
-    right: 5%;
-    bottom: 8%;
-  }
-
-  .hero-deco img {
-    width: 120px;
-  }
-}
-
- /* HERO LOGO FIX */
-.hero-deco {
-  position: absolute;
-  right: 10%;
-  bottom: 12%;
-  opacity: 0.6;
-}
-
-.hero-deco img {
-  width: 80px;   /* reduced from big size */
-}
-
- /* HERO TEXT FIX */
-.hero-content {
-  max-width: 100%;
-  padding: 0 1.5rem;
-  text-align: left;
-}
-
-.hero-title {
-  font-size: 1.7rem;
-  line-height: 1.3;
-}
-
-.hero-body {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
- /* NAV MOBILE FIX */
-@media (max-width: 768px) {
-
-  nav {
-    padding: 0.8rem 1rem;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .nav-links a {
-    font-size: 11px;
-  }
-
-}
-
- /* GET INVOLVED POPUP */
-
-.involved-popup {
-  display: none;
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(0,0,0,0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.involved-box {
-  background: #fff;
-  width: 500px;
-  max-width: 90%;
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.involved-list {
-  text-align: left;
-  margin: 20px 0;
-}
-
-.involved-item {
-  margin-bottom: 15px;
-}
-
-.involved-item h3 {
-  font-size: 16px;
-  color: #3a1f00;
-  margin-bottom: 5px;
-}
-
-.involved-item p {
-  font-size: 13px;
-  color: #7a5c2e;
-}
-
-.apply-main-btn {
-  display: inline-block;
-  margin: 10px 0;
-  padding: 12px 25px;
-  border-radius: 30px;
-  background: #3a1f00;
-  color: #e8c060;
-  text-decoration: none;
-  font-size: 12px;
-  letter-spacing: 0.1em;
-}
-
-.apply-main-btn:hover {
-  background: #5c2d00;
-  color: #fff;
-}
-
-.close-btn {
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-
-  /* ===== HERO FIX ===== */
-  #home {
-    min-height: 75vh;
-    padding: 100px 1.5rem 2rem;
-    text-align: center;
-  }
-
-  .hero-bg {
-    background:
-      linear-gradient(to bottom, rgba(245,240,232,0.95), rgba(245,240,232,0.6)),
-      url('hero.jpg') center / cover no-repeat;
-  }
-
-  .hero-title {
-    font-size: 1.8rem;
-    line-height: 1.3;
-  }
-
-  .hero-body {
-    font-size: 14px;
-  }
-
-  /* 🔥 FIX LOGO OVERLAP */
-  .hero-deco {
-    position: static;
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .hero-deco img {
-    width: 100px;
-    opacity: 0.8;
-  }
-
-  /* ===== IMPACT FIX ===== */
-  .impact-grid {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-
-  .impact-card {
-    padding: 1.5rem;
-    border-radius: 10px;
-  }
-
-  .impact-number {
-    font-size: 2rem;
-  }
-
-  /* ===== TEAM FIX ===== */
-  .team-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .team-card img {
-    height: 250px;
-    object-fit: cover;
-  }
-
-  .team-card-body {
-    padding: 1.2rem;
-  }
-
-  .team-card-body p {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-}
- 
-
-/* LOADER */
-#loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--cream-light);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-#loader img {
-  width: 80px;
-  animation: spinLoader 2s linear infinite;
-}
-
-@keyframes spinLoader {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
- 
 </style>
 </head>
 <body>
- 
+
+<!-- LOADER — uses icon-only logo (ff_logo.png) for a clean spin -->
 <div id="loader">
-  <img src="logo.png" alt="Loading...">
+  <img src="ff_logo.png" alt="Loading Fajar Foundation…"/>
 </div>
- 
+
 <!-- NAV -->
 <nav>
   <a href="#home" class="nav-logo">
@@ -1140,7 +864,7 @@ footer {
     <li><a href="#team">TEAM</a></li>
     <li><a href="#donate">DONATE</a></li>
     <li><a href="#contact">CONTACT</a></li>
-   <a href="#" onclick="openInvolved()">GET INVOLVED</a>
+    <li><button class="nav-involved-btn" onclick="openInvolved()">GET INVOLVED</button></li>
   </ul>
 </nav>
 
@@ -1157,15 +881,9 @@ footer {
       A collective of young professionals committed to those whom the world has overlooked or pushed to the margins. Rooted in the heart of <strong>rural India</strong>, we believe that community-led leadership can replace systemic dependency — one dawn at a time.
     </p>
     <a href="#about" class="hero-cta">DISCOVER OUR STORY →</a>
-    <div class="hero-dots">
-      <div class="hero-dot"></div>
-      <div class="hero-dot inactive"></div>
-      <div class="hero-dot inactive"></div>
-      <div class="hero-dot inactive"></div>
-    </div>
   </div>
   <div class="hero-deco">
-    <img src="ff_logo.png" alt="Fajar Logo" style="width:220px; opacity:0.9;">
+    <img src="ff_logo.png" alt="Fajar Foundation"/>
   </div>
 </section>
 
@@ -1262,7 +980,7 @@ footer {
 
 <!-- PROGRAMS -->
 <section id="programs">
-  <div class="section-eyebrow reveal" style="color:var(--gold);">OUR PROGRAMS</div>
+  <div class="programs-eyebrow reveal">OUR PROGRAMS</div>
   <h2 class="programs-title reveal">Initiatives for Impact</h2>
   <p class="programs-sub reveal">From rural classrooms to community leadership — our programs are designed to ignite change from within.</p>
   <div class="programs-grid">
@@ -1286,34 +1004,26 @@ footer {
 
 <!-- IMPACT -->
 <section id="impact">
-  <div class="impact-header reveal">
-    <div class="impact-eyebrow">OUR IMPACT</div>
-    <h2 class="impact-title">Numbers that Tell Our Story</h2>
-    <p class="impact-sub">Every number reflects a life touched, a future shaped, and a community strengthened.</p>
-  </div>
-
+  <div class="impact-eyebrow reveal">OUR IMPACT</div>
+  <h2 class="impact-title reveal">Numbers that Tell Our Story</h2>
+  <p class="impact-sub reveal">Every number reflects a life touched, a future shaped, and a community strengthened.</p>
   <div class="impact-grid">
-
-    <div class="impact-card">
-      <h3 class="impact-number" data-target="1000">0</h3>
+    <div class="impact-card reveal">
+      <span class="impact-number" data-target="1000">0</span>
       <p class="impact-label">Students Reached</p>
     </div>
-
-    <div class="impact-card">
-      <h3 class="impact-number" data-target="5">0</h3>
+    <div class="impact-card reveal">
+      <span class="impact-number" data-target="5">0</span>
       <p class="impact-label">Schools Engaged</p>
     </div>
-
-    <div class="impact-card">
-      <h3 class="impact-number" data-target="2">0</h3>
+    <div class="impact-card reveal">
+      <span class="impact-number" data-target="2">0</span>
       <p class="impact-label">Districts Covered</p>
     </div>
-
-    <div class="impact-card">
-      <h3 class="impact-number" data-target="200">0</h3>
+    <div class="impact-card reveal">
+      <span class="impact-number" data-target="200">0</span>
       <p class="impact-label">Community Members Supported</p>
     </div>
-
   </div>
 </section>
 
@@ -1331,11 +1041,10 @@ footer {
       <div class="team-info">
         <span class="team-badge">Co-Founder</span>
         <h3 class="team-name">Alim</h3>
-        <p class="team-bio">Alim Shaikh is a development professional with 7+ years of experience in education, youth development, and public systems.
-           A Gandhi Fellowship alumnus, he has worked closely with governments and communities to improve learning outcomes and strengthen program implementation.
-
-Coming from a rural school background, he is deeply committed to creating equitable opportunities for young people. At Fajar Foundation, he focuses on building
- scalable solutions that empower students and strengthen local education systems.</p>
+        <div class="team-bio">
+          <p>Alim Shaikh is a development professional with 7+ years of experience in education, youth development, and public systems. A Gandhi Fellowship alumnus, he has worked closely with governments and communities to improve learning outcomes and strengthen program implementation.</p>
+          <p>Coming from a rural school background, he is deeply committed to creating equitable opportunities for young people. At Fajar Foundation, he focuses on building scalable solutions that empower students and strengthen local education systems.</p>
+        </div>
       </div>
       <div class="team-card-bar"></div>
     </div>
@@ -1347,9 +1056,10 @@ Coming from a rural school background, he is deeply committed to creating equita
       <div class="team-info">
         <span class="team-badge">Co-Founder</span>
         <h3 class="team-name">Kartik</h3>
-        <p class="team-bio">Kartik brings over a decade of experience in the development sector, with a strong focus on rural communities. His journey began in Melghat, shaping his commitment to social impact.
-
-He has worked extensively in Chhattisgarh on livelihoods, gender, and youth development. Kartik is also passionate about mentoring rural students to access higher education, and at Fajar, he works on creating pathways for youth empowerment.</p>
+        <div class="team-bio">
+          <p>Kartik brings over a decade of experience in the development sector, with a strong focus on rural communities. His journey began in Melghat, shaping his commitment to social impact.</p>
+          <p>He has worked extensively in Chhattisgarh on livelihoods, gender, and youth development. Kartik is also passionate about mentoring rural students to access higher education, and at Fajar, he works on creating pathways for youth empowerment.</p>
+        </div>
       </div>
       <div class="team-card-bar"></div>
     </div>
@@ -1361,9 +1071,10 @@ He has worked extensively in Chhattisgarh on livelihoods, gender, and youth deve
       <div class="team-info">
         <span class="team-badge">Co-Founder</span>
         <h3 class="team-name">Nitin</h3>
-        <p class="team-bio">Nitin is a development practitioner with 4+ years of experience working in tribal regions of central India. His work focuses on climate resilience, rural governance, and strengthening grassroots institutions.
-
-He has supported women farmers and community groups in building sustainable livelihoods and accessing social protection. At Fajar, he brings a strong field perspective to drive community-led development initiatives.</p>
+        <div class="team-bio">
+          <p>Nitin is a development practitioner with 4+ years of experience working in tribal regions of central India. His work focuses on climate resilience, rural governance, and strengthening grassroots institutions.</p>
+          <p>He has supported women farmers and community groups in building sustainable livelihoods and accessing social protection. At Fajar, he brings a strong field perspective to drive community-led development initiatives.</p>
+        </div>
       </div>
       <div class="team-card-bar"></div>
     </div>
@@ -1395,153 +1106,120 @@ He has supported women farmers and community groups in building sustainable live
 
 <!-- FOOTER -->
 <footer>
-
   <div class="footer-left">
     <div class="footer-logo">
       <img src="logo.png" alt="Fajar Foundation"/>
     </div>
-
     <div class="footer-address">
       FAJAR FOUNDATION<br>
-      C/O AVINASH RAMRAO, CHITRAKAR,
-      AT TAWLAR, Pathrot,<br>
-      Achalpur City, Amravati - 444808,
+      C/O Avinash Ramrao Chitrakar,<br>
+      At Tawlar, Pathrot,<br>
+      Achalpur City, Amravati – 444808,<br>
       Maharashtra
     </div>
   </div>
-
   <div class="footer-right">
     <div class="footer-social">
-      <a href="#" target="_blank" class="social-icon">
+      <a href="#" target="_blank" class="social-icon" aria-label="LinkedIn">
         <i class="fab fa-linkedin-in"></i>
       </a>
-      <a href="#" target="_blank" class="social-icon">
+      <a href="#" target="_blank" class="social-icon" aria-label="Instagram">
         <i class="fab fa-instagram"></i>
       </a>
     </div>
-
     <p class="footer-copy">
-      © 2024 Fajar Foundation. Registered under Section 8, Companies Act 2013.
+      © 2024 Fajar Foundation.<br>Registered under Section 8, Companies Act 2013.
     </p>
   </div>
-
 </footer>
 
+<!-- GET INVOLVED POPUP -->
+<div id="involvedPopup" class="involved-popup">
+  <div class="involved-box">
+    <button class="close-btn" onclick="closeInvolved()" aria-label="Close">×</button>
+    <h2>Work With Us</h2>
+    <p class="involved-sub">Join us in building change from the ground up.</p>
+    <div class="involved-list">
+      <div class="involved-item">
+        <h3>Social Media &amp; Communications Intern</h3>
+        <p>Create content, manage social media, and help us tell impactful stories.<br><strong>Duration:</strong> 3 months</p>
+      </div>
+      <div class="involved-item">
+        <h3>Fundraising &amp; Partnerships Intern</h3>
+        <p>Support fundraising strategy, donor outreach, and partnerships.<br><strong>Duration:</strong> 3 months</p>
+      </div>
+      <div class="involved-item">
+        <h3>Field Research Intern</h3>
+        <p>Work with communities, collect field data, and support program insights.<br><strong>Duration:</strong> 2–3 months</p>
+      </div>
+    </div>
+    <a href="https://forms.gle/2pZhjgX8KpmhEt1s8" target="_blank" rel="noopener noreferrer" class="apply-main-btn">
+      APPLY NOW →
+    </a>
+  </div>
+</div>
+
 <script>
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
+  /* ── SCROLL REVEAL ──────────────────────────────── */
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        observer.unobserve(e.target);
+        revealObserver.unobserve(e.target);
       }
     });
   }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
-// IMPACT COUNTER ANIMATION
-// IMPACT COUNTER (FAST + SMOOTH)
-const counters = document.querySelectorAll('.impact-number');
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-const animateCounters = () => {
-  counters.forEach(counter => {
-    const target = +counter.getAttribute('data-target');
-    const duration = 1500;
-    const startTime = performance.now();
+  /* ── IMPACT COUNTER ─────────────────────────────── */
+  const animateCounters = () => {
+    document.querySelectorAll('.impact-number').forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const duration = 1500;
+      const startTime = performance.now();
+      const update = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        counter.textContent = Math.floor(progress * target).toLocaleString();
+        if (progress < 1) requestAnimationFrame(update);
+        else counter.textContent = target.toLocaleString();
+      };
+      requestAnimationFrame(update);
+    });
+  };
 
-    const update = (currentTime) => {
-      const progress = Math.min((currentTime - startTime) / duration, 1);
-      const value = Math.floor(progress * target);
+  const impactObserver = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      animateCounters();
+      impactObserver.disconnect();
+    }
+  }, { threshold: 0.3 });
+  impactObserver.observe(document.querySelector('#impact'));
 
-      counter.innerText = value.toLocaleString();
-
-      if (progress < 1) {
-        requestAnimationFrame(update);
-      } else {
-        counter.innerText = target.toLocaleString();
-      }
-    };
-
-    requestAnimationFrame(update);
-  });
-};
-
-const impactSection = document.querySelector('#impact');
-
-const impactObserver = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting) {
-    animateCounters();
-    impactObserver.disconnect();
+  /* ── GET INVOLVED POPUP ─────────────────────────── */
+  function openInvolved() {
+    document.getElementById('involvedPopup').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
   }
-}, { threshold: 0.3 });
 
-impactObserver.observe(impactSection);
+  function closeInvolved() {
+    document.getElementById('involvedPopup').style.display = 'none';
+    document.body.style.overflow = '';
+  }
 
+  // Close on backdrop click
+  document.getElementById('involvedPopup').addEventListener('click', function(e) {
+    if (e.target === this) closeInvolved();
+  });
 
-function openInvolved() {
-  document.getElementById("involvedPopup").style.display = "flex";
-}
-
-function closeInvolved() {
-  document.getElementById("involvedPopup").style.display = "none";
-}
-
-
- window.addEventListener("load", function() {
-  const loader = document.getElementById("loader");
-
-  setTimeout(() => {
-    loader.style.opacity = "0";
-    loader.style.transition = "opacity 0.5s ease";
-
+  /* ── PAGE LOADER ────────────────────────────────── */
+  window.addEventListener('load', function () {
+    const loader = document.getElementById('loader');
     setTimeout(() => {
-      loader.style.display = "none";
-    }, 500);
-
-  }, 1200); // duration of loader
-});
- 
+      loader.style.opacity = '0';
+      setTimeout(() => { loader.style.display = 'none'; }, 500);
+    }, 1200);
+  });
 </script>
-<div id="involvedPopup" class="involved-popup">
 
-  <div class="involved-box">
-
-    <span class="close-btn" onclick="closeInvolved()">×</span>
-
-    <h2>Work With Us</h2>
-    <p style="margin-bottom:20px; color:#7a5c2e;">
-      Join us in building change from the ground up.
-    </p>
-
-
-
-    <div class="involved-list">
-
-      <div class="involved-item">
-        <h3>Social Media & Communications Intern</h3>
-        <p>Create content, manage social media, and help us tell impactful stories.
-        <br><strong>Duration:</strong> 3 months</p>
-      </div>
-
-      <div class="involved-item">
-        <h3>Fundraising & Partnerships Intern</h3>
-        <p>Support fundraising strategy, donor outreach, and partnerships.
-        <br><strong>Duration:</strong> 3 months</p>
-      </div>
-
-      <div class="involved-item">
-        <h3>Field Research Intern</h3>
-        <p>Work with communities, collect field data, and support program insights.
-        <br><strong>Duration:</strong> 2–3 months</p>
-      </div>
-
-    </div>
-
-    <!-- BOTTOM APPLY -->
-    <a href="https://forms.gle/2pZhjgX8KpmhEt1s8" target="_blank" rel="noopener noreferrer" class="apply-main-btn">
-  APPLY NOW
-</a>
-
-  </div>
-</div>
 </body>
 </html>
