@@ -36,6 +36,7 @@
   Search for the section you want (e.g. <!-- TEAM -->) and
   edit the text between the HTML tags. You do NOT need to
   touch the CSS or JavaScript to change words or images.
+  
   ============================================================
 -->
 <html lang="en">
