@@ -3,8 +3,8 @@
 Plain HTML, CSS and JS. No build step is needed to host it: GitHub Pages serves the files as they are.
 
 ## Still to fill in
-- **Certificate of Incorporation**: add the PDF to `assets/docs/` and link it on `transparency.html` (the highlighted line under "Documents").
-- When 12A, 80G or CSR-1 registrations come through, update `transparency.html` and `get-involved.html`.
+- **Documents section**: removed for now. When the Certificate of Incorporation and annual reports are ready, add a "Documents" section back to the Transparency page in `build.py`.
+- When 12A, 80G or CSR-1 registrations come through, add them to the Transparency page's legal details.
 
 ## Editing
 Page content, the shared header and footer, and the CIN and contact details live in `build.py`.

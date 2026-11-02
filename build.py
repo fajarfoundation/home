@@ -160,6 +160,53 @@ TEAM = chr(10).join([
            "His work spans climate resilience, rural governance and strengthening grassroots institutions. He has supported women farmers and community groups to build sustainable livelihoods and reach social protection. At Fajar he brings that field experience to community-led work."),
 ])
 
+# ---------------------------------------------------------------- Shared bits for inner pages
+UI = {
+    "decide": '<circle cx="32" cy="32" r="22"/><path d="m22 33 7 7 14-15"/>',
+    "early": '<circle cx="32" cy="32" r="22"/><path d="M32 18v15l10 6"/>',
+    "evidence": '<path d="M10 54V10M10 54h44"/><path d="M20 44V32M32 44V22M44 44V14"/>',
+    "local": '<path d="M32 58S12 40 12 26a20 20 0 0 1 40 0c0 14-20 32-20 32Z"/><circle cx="32" cy="26" r="7"/>',
+    "fund": '<path d="M32 54S8 40 8 24a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 16-24 30-24 30Z"/>',
+    "partner": '<circle cx="24" cy="32" r="16"/><circle cx="40" cy="32" r="16"/>',
+    "mentor": '<path d="M8 12h48v32H26l-12 10V44H8Z"/><path d="M20 24h24M20 33h14"/>',
+    "talk": '<rect x="24" y="6" width="16" height="30" rx="8"/><path d="M14 30a18 18 0 0 0 36 0M32 48v10M22 58h20"/>',
+    "mail": '<rect x="6" y="12" width="52" height="40" rx="6"/><path d="m8 16 24 20 24-20"/>',
+    "phone": '<path d="M14 8h12l4 14-8 5a34 34 0 0 0 15 15l5-8 14 4v12a6 6 0 0 1-6 6A46 46 0 0 1 8 14a6 6 0 0 1 6-6Z"/>',
+    "pin": '<path d="M32 58S12 40 12 26a20 20 0 0 1 40 0c0 14-20 32-20 32Z"/><circle cx="32" cy="26" r="7"/>',
+    "shield": '<path d="M32 6 10 14v16c0 14 9 24 22 28 13-4 22-14 22-28V14Z"/><path d="m22 32 7 7 13-14"/>',
+    "lock": '<rect x="12" y="28" width="40" height="28" rx="5"/><path d="M20 28V20a12 12 0 0 1 24 0v8"/><circle cx="32" cy="42" r="3"/>',
+    "doc": '<path d="M16 6h22l12 12v40H16Z"/><path d="M38 6v12h12M24 32h18M24 40h18"/>',
+    "school": '<path d="M4 24 32 10l28 14-28 14Z"/><path d="M16 31v14c0 4 7 8 16 8s16-4 16-8V31"/>',
+    "people": '<circle cx="22" cy="22" r="9"/><circle cx="44" cy="26" r="7"/><path d="M6 54c1-11 8-17 16-17s15 6 16 17M40 40c8 0 15 5 18 14"/>',
+    "book": '<path d="M8 10h20a6 6 0 0 1 4 2 6 6 0 0 1 4-2h20v40H36a6 6 0 0 0-4 2 6 6 0 0 0-4-2H8Z"/><path d="M32 12v40"/>',
+}
+
+
+def ui(name):
+    return f'<svg class="ico" viewBox="0 0 64 64" aria-hidden="true">{UI[name]}</svg>'
+
+
+def hero(eyebrow, h1, lead=""):
+    lead_html = f'\n    <p class="lead">{lead}</p>' if lead else ""
+    return f"""
+<section class="page-hero approach-hero compact">
+  <img class="hero-watermark" src="assets/img/pinwheel.png" alt="" width="520" height="520">
+  <div class="wrap">
+    <span class="eyebrow">{eyebrow}</span>
+    <h1>{h1}</h1>{lead_html}
+  </div>
+</section>
+"""
+
+
+def card(icon, title, text, extra="", delay=0):
+    return f"""<article class="card2 reveal" style="--d:{delay}ms">
+      <div class="icon-tile sm">{ui(icon)}</div>
+      <h3>{title}</h3>
+      <p>{text}</p>{extra}
+    </article>"""
+
+
 # ---------------------------------------------------------------- Home
 HOME = f"""
 <section class="hero">
@@ -221,7 +268,7 @@ HOME = f"""
     <div class="reveal">
       <span class="eyebrow">Where we are today</span>
       <h2 id="now-h">Small, honest, and just getting started.</h2>
-      <p>We are a young organisation and we say so plainly. Today we work in two government tribal residential schools in Melghat, Amravati district. Our founders hold full-time jobs and run sessions themselves on alternate weeks. The work is unfunded so far.</p>
+      <p>We are a young organisation and we say so plainly. Today we work in two government tribal residential schools in Melghat, Amravati district. The work is unfunded so far.</p>
       <p>Next, we want to bring the programme to more schools and reach more students across rural Maharashtra.</p>
       <div class="actions"><a class="btn btn-primary" href="where-we-work.html">See where we work</a></div>
     </div>
@@ -234,11 +281,18 @@ HOME = f"""
 </section>
 
 <section class="section" aria-labelledby="trust-h">
-  <div class="wrap">
-    <h2 id="trust-h">Why you can trust us</h2>
-    <p>We are a not-for-profit company registered under Section 8 of the Companies Act, 2013. Our registration details, governance and status of tax registrations are all on one page.</p>
-    <p>We measure what we do, and we will publish what we find, whether the results are good, mixed or disappointing.</p>
-    <div class="actions"><a class="btn btn-ghost" href="transparency.html">View our registration details</a></div>
+  <div class="wrap split split-wide">
+    <div class="reveal">
+      <span class="eyebrow">Transparency</span>
+      <h2 id="trust-h">Why you can trust us</h2>
+      <p class="lead">Our registration details and governance are all on one page.</p>
+      <div class="actions"><a class="btn btn-ghost" href="transparency.html">View our registration details</a></div>
+    </div>
+    <div class="cards1 tones">
+      {card("shield", "Registered and verifiable", "A not-for-profit company under Section 8 of the Companies Act, 2013. Anyone can check our CIN on the Ministry of Corporate Affairs website.", delay=0)}
+      {card("people", "Accountable people", "The founders and our governance head are named, with their backgrounds, on this site.", delay=100)}
+      {card("evidence", "We publish what we find", "We measure what we do, and we will publish the results, whether they are good, mixed or disappointing.", delay=200)}
+    </div>
   </div>
 </section>
 
@@ -246,7 +300,7 @@ HOME = f"""
   <div class="wrap">
     <span class="eyebrow">Our team</span>
     <h2 id="team-h">The people behind Fajar</h2>
-    <p class="lead">Fajar is run by its founders, who give their evenings, weekends and alternate weeks to the schools we work with.</p>
+    <p class="lead">Fajar is led by its founders, who bring experience in education and rural development to the schools we work with.</p>
     <div class="team">
       {TEAM}
     </div>
@@ -266,36 +320,35 @@ HOME = f"""
 """
 
 # ---------------------------------------------------------------- About
-ABOUT = f"""
-<section class="page-hero"><div class="wrap">
-  <h1>Fajar means dawn. We started because too many students reach adulthood in the dark about their options.</h1>
-</div></section>
-
-<section class="section"><div class="wrap split">
-  <div>
-    <h2>Why we exist</h2>
-    <p>In rural government schools, the decisions that shape a young person’s life — which stream to take, whether to continue after Class 10, what to study next — are often made by marks, family pressure or what friends are doing. Few students have met someone who does the work they dream of. Few schools have a career counsellor.</p>
-    <p>We believe a student from a village school should make these choices with as much information and confidence as a student anywhere else.</p>
-  </div>
-  <div>
-    <h2>What we stand for</h2>
-    <ul class="plain-list">
-      <li><b>Students decide.</b> We don’t tell students what to become. We help them find out, think it through and decide.</li>
-      <li><b>Start early, stay long.</b> We begin in Grade 8 and stay in touch after students leave school.</li>
-      <li><b>Evidence over claims.</b> We measure our work carefully and share the results honestly.</li>
-      <li><b>Rooted locally.</b> We work in the districts we come from, in the language students speak.</li>
-    </ul>
+ABOUT = hero("About us", "Fajar means dawn. We started because too many students reach adulthood in the dark about their options.") + f"""
+<section class="section"><div class="wrap">
+  <div class="split">
+    <div class="reveal">
+      <span class="eyebrow">Why we exist</span>
+      <h2>A village school student deserves the same clarity as anyone else.</h2>
+      <p>In rural government schools, the decisions that shape a young person’s life — which stream to take, whether to continue after Class 10, what to study next — are often made by marks, family pressure or what friends are doing. Few students have met someone who does the work they dream of. Few schools have a career counsellor.</p>
+      <p>We believe a student from a village school should make these choices with as much information and confidence as a student anywhere else.</p>
+    </div>
+    <div class="values tones">
+      {card("decide", "Students decide", "We don’t tell students what to become. We help them find out, think it through and decide.", delay=0)}
+      {card("early", "Start early, stay long", "We begin in Grade 8 and stay in touch after students leave school.", delay=100)}
+      {card("evidence", "Evidence over claims", "We measure our work carefully and share the results honestly.", delay=200)}
+      {card("local", "Rooted locally", "We work in the districts we come from, in the language students speak.", delay=300)}
+    </div>
   </div>
 </div></section>
 
-<section class="section band"><div class="wrap split">
-  <div><h2>Our mission</h2><p class="lead">To prepare students in rural government schools to make informed career decisions and pursue them with confidence.</p></div>
-  <div><h2>Our vision</h2><p class="lead">A rural India where every student’s future is shaped by their own informed choice, not by chance.</p></div>
+<section class="section-tight band"><div class="wrap">
+  <div class="mv">
+    <div class="mv-card mission reveal"><span class="eyebrow">Our mission</span><p>To prepare students in rural government schools to make informed career decisions and pursue them with confidence.</p></div>
+    <div class="mv-card vision reveal" style="--d:120ms"><span class="eyebrow">Our vision</span><p>A rural India where every student’s future is shaped by their own informed choice, not by chance.</p></div>
+  </div>
 </div></section>
 
 <section class="section" id="team"><div class="wrap">
-  <h2>Our team</h2>
-  <p class="lead">Fajar is run by its founders, who give their evenings, weekends and alternate weeks to the schools we work with.</p>
+  <span class="eyebrow">Our team</span>
+  <h2>The people behind Fajar</h2>
+  <p class="lead">Fajar is led by its founders, who bring experience in education and rural development to the schools we work with.</p>
   <div class="team">
     {TEAM}
   </div>
@@ -394,45 +447,50 @@ APPROACH = f"""
 """
 
 # ---------------------------------------------------------------- Where we work
-WHERE = """
-<section class="page-hero"><div class="wrap">
-  <h1>We work where we come from: rural Maharashtra.</h1>
-</div></section>
+def stat(num, label, count=True):
+    attr = f' data-count="{num}"' if count else ""
+    return f'<div class="stat-card light reveal"><b{attr}>{num}</b><span>{label}</span></div>'
 
-<section class="section"><div class="wrap split">
-  <div>
-    <h2>Now: Melghat, Amravati district</h2>
-    <p>Melghat is a forested, largely tribal region in the Satpura hills of northern Amravati district. We work in two government tribal residential (ashram) schools here, with students in Classes 9 to 12.</p>
-    <div class="facts">
-      <div><b>2</b><span>schools</span></div>
-      <div><b>183</b><span>students</span></div>
-      <div><b>9–12</b><span>classes</span></div>
-    </div>
-    <p>In Maharashtra, Scheduled Tribe students drop out of Classes 9 and 10 at almost twice the overall rate. That is why we started here.</p>
-    <p>Our office is at Tawlar, Pathrot, Achalpur City, Amravati - 444808, Maharashtra.</p>
-  </div>
-  <div>
-    <iframe class="map" title="Map of Achalpur and Melghat, Amravati district" loading="lazy"
-      src="https://www.openstreetmap.org/export/embed.html?bbox=76.95%2C21.15%2C77.85%2C21.70&amp;layer=mapnik"></iframe>
-    <p class="small">Achalpur tahsil and the Melghat region, Amravati district. Map © OpenStreetMap contributors.</p>
-  </div>
-</div></section>
 
-<section class="section band"><div class="wrap split">
-  <div>
-    <h2>Next: Beed district</h2>
-    <p>We plan to extend the programme to schools in Beed district in Marathwada, where many students face the same lack of guidance at the same decision points.</p>
-  </div>
-  <div>
-    <h2>How we work with schools</h2>
-    <p>We work inside government schools, with the permission and support of school leadership and education officials. Sessions run during school time, and we involve teachers so the work can continue.</p>
-  </div>
-</div></section>
-
+WHERE = hero("Where we work", "We work where we come from: rural Maharashtra.",
+             "Government tribal residential schools in Melghat, Amravati district, with more schools to come.") + f"""
 <section class="section"><div class="wrap">
-  <h2>Want Fajar in your school or district?</h2>
-  <p class="lead">If you are a headteacher, education officer or local organisation in rural Maharashtra, we would like to hear from you.</p>
-  <div class="actions"><a class="btn btn-primary" href="contact.html">Contact us</a></div>
+  <div class="split">
+    <div class="reveal">
+      <span class="eyebrow">Now</span>
+      <h2>Melghat, Amravati district</h2>
+      <p>Melghat is a forested, largely tribal region in the Satpura hills of northern Amravati district. We work in two government tribal residential (ashram) schools here, with students in Classes 9 to 12.</p>
+      <div class="now-stats three">
+        {stat("2", "schools")}
+        {stat("183", "students")}
+        {stat("9–12", "classes", count=False)}
+      </div>
+      <div class="callout">
+        <b>Why we started here.</b> In Maharashtra, Scheduled Tribe students drop out of Classes 9 and 10 at almost twice the overall rate.
+      </div>
+    </div>
+    <div class="reveal" style="--d:120ms">
+      <iframe class="map" title="Map of Achalpur and Melghat, Amravati district" loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=76.95%2C21.15%2C77.85%2C21.70&amp;layer=mapnik"></iframe>
+      <p class="small">Achalpur tahsil and the Melghat region, Amravati district. Map © OpenStreetMap contributors.</p>
+      <div class="address-chip">{ui("pin")}<span>Our office: At Tawlar, Pathrot, Achalpur City, Amravati - 444808, Maharashtra</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="section-tight band"><div class="wrap">
+  <div class="cards3 tones">
+    {card("school", "Next: Beed district", "We plan to extend the programme to schools in Beed district in Marathwada, where many students face the same lack of guidance at the same decision points.", delay=0)}
+    {card("people", "How we work with schools", "We work inside government schools, with the permission and support of school leadership and education officials.", delay=100)}
+    {card("book", "Teachers stay involved", "Sessions run during school time, and we involve teachers so the work can continue.", delay=200)}
+  </div>
+</div></section>
+
+<section class="section-tight"><div class="wrap">
+  <div class="cta-strip reveal">
+    <div><h2>Want Fajar in your school or district?</h2><p>If you are a headteacher, education officer or local organisation in rural Maharashtra, we would like to hear from you.</p></div>
+    <a class="btn btn-primary" href="contact.html">Contact us</a>
+  </div>
 </div></section>
 """
 
@@ -552,102 +610,95 @@ EVIDENCE = f"""
 """
 
 # ---------------------------------------------------------------- Get involved
-INVOLVED = """
-<section class="page-hero"><div class="wrap">
-  <h1>Help more rural students choose their future.</h1>
-</div></section>
+def way(icon, title, text, href, label, delay):
+    return card(icon, title, text, extra=f'<a class="card-link" href="{href}">{label} <span aria-hidden="true">→</span></a>', delay=delay)
 
+
+INVOLVED = hero("Support our work", "Help more rural students choose their future.",
+                "There are four ways to be part of it. Write to us and we will take it from there.") + f"""
 <section class="section"><div class="wrap">
-  <h2>Ways to support our work</h2>
-  <div class="ways">
-    <div><h3>Fund the programme</h3><p>Our school work is currently unfunded and run by volunteers. Funding would let us hire a dedicated facilitator and reach more schools. Write to us and we will share our budget and plan.</p><a href="mailto:connects@fajarfoundation.org?subject=Funding%20Fajar%20Foundation">Ask for our budget</a></div>
-    <div><h3>Partner with us</h3><p>Foundations, companies and government departments can partner with us on programme delivery, research or expansion to new districts.</p><a href="mailto:connects@fajarfoundation.org?subject=Partnership%20with%20Fajar%20Foundation">Propose a partnership</a></div>
-    <div><h3>Mentor a student</h3><p>Commit an hour a month, by phone or video, to guide a student through college choices and the first years after school.</p><a href="mailto:connects@fajarfoundation.org?subject=Mentoring%20a%20Fajar%20student">Offer to mentor</a></div>
-    <div><h3>Talk about your career</h3><p>Students rarely meet people outside a few familiar jobs. A 30-minute talk about your work, online or in person, can open a door.</p><a href="mailto:connects@fajarfoundation.org?subject=Career%20talk%20for%20Fajar%20students">Offer a career talk</a></div>
+  <div class="cards2 tones">
+    {way("fund", "Fund the programme", "Our school work is currently unfunded and run by volunteers. Funding would let us hire a dedicated facilitator and reach more schools. Write to us and we will share our budget and plan.", "mailto:connects@fajarfoundation.org?subject=Funding%20Fajar%20Foundation", "Ask for our budget", 0)}
+    {way("partner", "Partner with us", "Foundations, companies and government departments can partner with us on programme delivery, research or expansion to new districts.", "mailto:connects@fajarfoundation.org?subject=Partnership%20with%20Fajar%20Foundation", "Propose a partnership", 100)}
+    {way("mentor", "Mentor a student", "Commit an hour a month, by phone or video, to guide a student through college choices and the first years after school.", "mailto:connects@fajarfoundation.org?subject=Mentoring%20a%20Fajar%20student", "Offer to mentor", 200)}
+    {way("talk", "Talk about your career", "Students rarely meet people outside a few familiar jobs. A 30-minute talk about your work, online or in person, can open a door.", "mailto:connects@fajarfoundation.org?subject=Career%20talk%20for%20Fajar%20students", "Offer a career talk", 300)}
   </div>
 </div></section>
 
-<section class="section band"><div class="wrap">
-  <h2>Before you give: our tax registration status</h2>
-  <div class="note">
-    <p>Fajar Foundation is a registered Section 8 company. We do <b>not yet</b> hold 12A or 80G registration, so donations to us are not currently eligible for income-tax deduction. We are also not yet registered with Form CSR-1, so companies cannot yet count funding to us as CSR spending.</p>
-    <p>We will update this page as soon as our status changes. Full details are on our <a href="transparency.html">Transparency</a> page.</p>
+<section class="section-tight"><div class="wrap">
+  <div class="cta-strip reveal">
+    <div><h2>Not sure where to start?</h2><p>Tell us a little about yourself or your organisation and we will suggest a way to help.</p></div>
+    <a class="btn btn-primary" href="contact.html">Talk to us</a>
   </div>
 </div></section>
 """
 
 # ---------------------------------------------------------------- Transparency
-TRANSPARENCY = f"""
-<section class="page-hero"><div class="wrap">
-  <h1>Our registration, governance and finances, in one place.</h1>
-</div></section>
+def person_chip(slug, name, role, initials):
+    return f"""<div class="gov-person reveal"><span class="avatar"><span aria-hidden="true">{initials}</span><img src="assets/img/team/{slug}.jpg" alt="" loading="lazy"></span><div><b>{name}</b><span>{role}</span></div></div>"""
 
-<section class="section"><div class="wrap split split-wide">
-  <div>
-    <h2>Legal details</h2>
-    <p>Anyone can verify our registration on the Ministry of Corporate Affairs website using our CIN.</p>
-  </div>
-  <div class="table-scroll">
-    <table class="record">
-      <tr><th scope="row">Legal name</th><td>Fajar Foundation</td></tr>
-      <tr><th scope="row">Legal form</th><td>Not-for-profit company under Section 8 of the Companies Act, 2013</td></tr>
-      <tr><th scope="row">Incorporated</th><td>January 2024</td></tr>
-      <tr><th scope="row">CIN</th><td>{CIN}</td></tr>
-      <tr><th scope="row">Registered office</th><td>At Tawlar, Pathrot, Achalpur City, Amravati - 444808, Maharashtra</td></tr>
-    </table>
-  </div>
-</div></section>
 
-<section class="section band"><div class="wrap split">
-  <div>
-    <h2>Governance</h2>
-    <div class="compact-team">
-      <div><b>Alim Shaikh</b><span>Co-Founder</span></div>
-      <div><b>Kartik Chitrakar</b><span>Co-Founder</span></div>
-      <div><b>Nitin Ingle</b><span>Internal Governance Head</span></div>
-    </div>
-    <p>As a Section 8 company, Fajar Foundation cannot distribute profits. Any income is used only to further our charitable objectives.</p>
-  </div>
-  <div>
-    <h2>Documents</h2>
-    <ul class="plain-list">
-      <li><span class="placeholder">Certificate of Incorporation (add PDF to assets/docs/)</span></li>
-      <li>Annual report 2024-25: <span class="small">to be published</span></li>
-      <li>Audited financial statements: <span class="small">to be published</span></li>
-    </ul>
-    <p class="small">For any document not listed here, write to <a href="mailto:connects@fajarfoundation.org">connects@fajarfoundation.org</a>.</p>
-  </div>
-</div></section>
+def record(label, value):
+    return f'<div class="rec-row"><dt>{label}</dt><dd>{value}</dd></div>'
 
+
+TRANSPARENCY = hero("Transparency", "Our registration, governance and finances, in one place.",
+                    "Anyone can verify our registration on the Ministry of Corporate Affairs website using our CIN.") + f"""
 <section class="section"><div class="wrap">
-  <h2>How we handle student data</h2>
-  <p>We collect student information only to support and track each student’s progress. We seek consent from students and their guardians, never publish identifiable details without permission, and keep records secure.</p>
+  <div class="split split-wide">
+    <div class="reveal">
+      <span class="eyebrow">Legal details</span>
+      <h2>Registered, and easy to verify.</h2>
+      <div class="trust-badge">{ui("shield")}<div><b>Section 8 company</b><span>A not-for-profit under the Companies Act, 2013</span></div></div>
+    </div>
+    <dl class="record-card reveal" style="--d:120ms">
+      {record("Legal name", "Fajar Foundation")}
+      {record("Legal form", "Not-for-profit company under Section 8 of the Companies Act, 2013")}
+      {record("Incorporated", "January 2024")}
+      {record("CIN", CIN)}
+      {record("Registered office", "At Tawlar, Pathrot, Achalpur City, Amravati - 444808, Maharashtra")}
+    </dl>
+  </div>
+</div></section>
+
+<section class="section-tight band"><div class="wrap">
+  <div class="split">
+    <div>
+      <span class="eyebrow">Governance</span>
+      <h2>Who is accountable.</h2>
+      <div class="gov-list">
+        {person_chip("alim", "Alim Shaikh", "Co-Founder", "AS")}
+        {person_chip("kartik", "Kartik Chitrakar", "Co-Founder", "KC")}
+        {person_chip("nitin", "Nitin Ingle", "Internal Governance Head", "NI")}
+      </div>
+    </div>
+    <div class="cards1 tones">
+      {card("shield", "No profit distribution", "As a Section 8 company, Fajar Foundation cannot distribute profits. Any income is used only to further our charitable objectives.", delay=0)}
+      {card("lock", "How we handle student data", "We collect student information only to support and track each student’s progress. We seek consent from students and their guardians, never publish identifiable details without permission, and keep records secure.", delay=100)}
+    </div>
+  </div>
 </div></section>
 """
 
 # ---------------------------------------------------------------- Contact
-CONTACT = f"""
-<section class="page-hero"><div class="wrap">
-  <h1>Talk to us.</h1>
-</div></section>
-
-<section class="section"><div class="wrap split">
-  <div>
-    <p class="lead">Whether you want to fund, partner, mentor or bring Fajar to your school, the fastest way to reach us is by email or phone.</p>
-    <ul class="contact-lines">
-      <li><b>Email</b><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-      <li><b>Phone and WhatsApp</b><a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a></li>
-      <li><b>Office</b><span>At Tawlar, Pathrot, Achalpur City,<br>Amravati - 444808, Maharashtra</span></li>
-    </ul>
-    <div class="actions">
-      <a class="btn btn-primary" href="mailto:{EMAIL}">Write an email</a>
-      <a class="btn btn-ghost" href="https://wa.me/918208186677">Message on WhatsApp</a>
+CONTACT = hero("Contact", "Talk to us.",
+               "Whether you want to fund, partner, mentor or bring Fajar to your school, the fastest way to reach us is by email or phone.") + f"""
+<section class="section"><div class="wrap">
+  <div class="split">
+    <div class="cards1 tones contact-cards">
+      {card("mail", "Email", f'<a href="mailto:{EMAIL}">{EMAIL}</a>', delay=0)}
+      {card("phone", "Phone and WhatsApp", f'<a href="tel:{PHONE_TEL}">{PHONE_DISPLAY}</a>', delay=100)}
+      {card("pin", "Office", "At Tawlar, Pathrot, Achalpur City,<br>Amravati - 444808, Maharashtra", delay=200)}
+      <div class="actions" style="margin-top:.5rem">
+        <a class="btn btn-primary" href="mailto:{EMAIL}">Write an email</a>
+        <a class="btn btn-ghost" href="https://wa.me/918208186677">Message on WhatsApp</a>
+      </div>
     </div>
-  </div>
-  <div>
-    <iframe class="map" title="Map of Achalpur, Amravati district" loading="lazy"
-      src="https://www.openstreetmap.org/export/embed.html?bbox=77.35%2C21.18%2C77.65%2C21.35&amp;layer=mapnik"></iframe>
-    <p class="small">Achalpur, Amravati district. Map © OpenStreetMap contributors.</p>
+    <div class="reveal">
+      <iframe class="map" title="Map of Achalpur, Amravati district" loading="lazy"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=77.35%2C21.18%2C77.65%2C21.35&amp;layer=mapnik"></iframe>
+      <p class="small">Achalpur, Amravati district. Map © OpenStreetMap contributors.</p>
+    </div>
   </div>
 </div></section>
 """
