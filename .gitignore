@@ -1,0 +1,14 @@
+# Original, oversized source images (web-sized copies are what the site uses)
+assets/img/hero1.png
+assets/img/fajar_pinwheel.png
+assets/img/Fajar_logo_hori.png
+assets/img/team/*_profile.jpg
+assets/img/team/* Profile.jpg
+
+# Python / editor / OS clutter
+__pycache__/
+*.pyc
+.vscode/
+.claude/
+Thumbs.db
+.DS_Store
